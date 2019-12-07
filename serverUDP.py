@@ -98,7 +98,7 @@ def enviar():
     for i in range(0, fragmento):
         datos = waveFile.readframes(1000)
         for i in range(0, len(direcciones)):
-            addr = (direcciones[i], 9999)
+            addr = (direcciones[i], UDP_port)
             #print("Estos son los datos"+ int(datos[i]))
             s.sendto(datos, addr)
         if frecuencia_1 == 44100:
@@ -121,6 +121,7 @@ if __name__ == '__main__':
 
     global direcciones
     global directorio
+    UDP_port = 44444
 
     #direcciones =["192.168.1.10","192.168.1.11","192.168.1.12","192.168.1.13","192.168.1.14"]
 
@@ -129,7 +130,7 @@ if __name__ == '__main__':
 
     IP_UDP = socket.gethostbyname_ex(socket.gethostname())[2][0]
     s=socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # Asignando socket para conexion UDP
-    s.bind(('',9999))
+    s.bind(('',UDP_port))
 
     p = pyaudio.PyAudio()
 
