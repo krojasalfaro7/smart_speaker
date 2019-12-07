@@ -9,3 +9,9 @@ https://audio.online-convert.com/es/convertir-a-wav
 Comando para extraer los bytes del archivo .wav
 
 xxd -i audio.wav
+
+Sofware "SOX" para convertir los diferentes tipos de audios
+
+http://sox.sourceforge.net/
+
+Descargar el repositorio git y leer el archivo README donde explica los pasos de instalación(si existen problemas para la instalación de algunos paquetes googlearlo) 
