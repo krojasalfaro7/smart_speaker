@@ -15,3 +15,12 @@ Sofware "SOX" para convertir los diferentes tipos de audios
 http://sox.sourceforge.net/
 
 Descargar el repositorio git y leer el archivo "INSTALL" donde explica los pasos de instalación(si existen problemas para la instalación de algunos paquetes googlearlo) 
+
+Sintaxis de uso de sox para la conversión de los tipos de audios
+
+sox disturbence.wav -r 16000 -c 1 -b 16 disturbence_16000_mono_16bit.wav
+
+Sample rate of 16 kHz (-r 16000),
+one channel (mono) (-c 1),
+16 bits bit depth (-b 16).
+
