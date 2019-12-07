@@ -1,0 +1,11 @@
+Gestor de paquetes de ESP32 con Arduino:
+
+https://dl.espressif.com/dl/package_esp32_index.json
+
+Página donde se puede convertir los diferentes audios:
+
+https://audio.online-convert.com/es/convertir-a-wav
+
+Comando para extraer los bytes del archivo .wav
+
+xxd -i audio.wav
