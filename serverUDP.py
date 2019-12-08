@@ -93,19 +93,21 @@ def revisar():                                              # Rutina que revisa 
 
 def enviar():
 
-    fragmento = length/1000
+    fragmento = length/1024
     fragmento = int(fragmento)+ 1
     for i in range(0, fragmento):
-        datos = waveFile.readframes(1000)
+        datos = waveFile.readframes(1024)
         for i in range(0, len(direcciones)):
             addr = (direcciones[i], UDP_port)
             #print("Estos son los datos"+ int(datos[i]))
+            #print("Este es el tamanio de los datos a enviar: ",len(datos))
             s.sendto(datos, addr)
-        if frecuencia_1 == 44100:
-            time.sleep(0.019666666999999999999)
+        #if frecuencia_1 == 44100:
+
+            #time.sleep(0.019666666999999999999)
             #time.sleep(0.016666666999999999999)
-        else:
-            time.sleep(0.09999996942749023)
+        #else:
+         #   time.sleep(0.09999996942749023)
 
 #=============================================================================
 
@@ -125,7 +127,7 @@ if __name__ == '__main__':
 
     #direcciones =["192.168.1.10","192.168.1.11","192.168.1.12","192.168.1.13","192.168.1.14"]
 
-    direcciones =["192.168.1.7"]
+    direcciones =["192.168.1.16"]
     directorio = '/home/kevin/audios/'
 
     IP_UDP = socket.gethostbyname_ex(socket.gethostname())[2][0]
@@ -134,7 +136,7 @@ if __name__ == '__main__':
 
     p = pyaudio.PyAudio()
 
-    mensaje=b'farewell.wav'
+    mensaje=b'mario-bros-mamma-mia.wav'
 
     while True:                             # El servidor UDP se queda mandando constantemente.
                 

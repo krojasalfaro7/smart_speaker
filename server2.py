@@ -3,15 +3,22 @@ import time
 
 PORT = 44444   
 BUFFER_SIZE = 4000    
+direcciones = ("192.168.1.16", 44444)
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
 s.bind(('', PORT))
+rList = [255]
+lista = [x for x in range(0,256)]
+lista = lista*4
+print(len(lista))
+
 while True:
-    direcciones = ("192.168.1.13", 44444)
-    rList = [1, 2, 3, 4, 5, 6]
-    data = bytes(rList)
+    rList[0] = int(input())
+    #data = bytes(rList)
+    data = bytes(lista)
+    print(data)
     s.sendto(data, direcciones)
-    time.sleep(2500)
+    print("enviado")
+    #time.sleep(2500)
 # Close connection
 #s.close()
