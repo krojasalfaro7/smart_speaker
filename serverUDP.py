@@ -12,6 +12,11 @@ import pyaudio
 import os
 import threading
 import time
+import subprocess
+import IPython
+import gtts
+from gtts import gTTS
+#import IPyhton
 from pydub import AudioSegment
 
 #=========================================================================
@@ -35,6 +40,7 @@ def convertidor(nombre_archivo):                # Funcion que permite convertir 
 
     print(lista, frecuencia_1)
     length = waveFile.getnframes()
+    print("Este es la longitud del archivo: ",length)
 
 def revisar():                                              # Rutina que revisa si el archivo tiene extenxion .wav
 
@@ -46,10 +52,6 @@ def revisar():                                              # Rutina que revisa 
     mensaje_r = mensaje_r[len(mensaje_r)-3:]                # Solo se queda con la extenxion 
     mensaje_r = int.from_bytes(mensaje_r, byteorder = 'big')# Para convertir la cadena byte a int
     lista_musica = os.listdir(directorio)
-
-    #print(lista_musica)
-    #print(mensaje.decode())
-    #print(lista_musica.index(mensaje.decode()))
 
     try:
         lista_musica.index(mensaje.decode())
@@ -93,19 +95,21 @@ def revisar():                                              # Rutina que revisa 
 
 def enviar():
 
-    fragmento = length/1024
-    fragmento = int(fragmento)+ 1
+    fragmento = int ((length/1024) + float(1))
+    contador = 0
+    print("El bucle deberia repetirse: "+str(fragmento) +"veces")
+    #x = input("ingresa algo")
     for i in range(0, fragmento):
         datos = waveFile.readframes(1024)
         for i in range(0, len(direcciones)):
             addr = (direcciones[i], UDP_port)
-            #print("Estos son los datos"+ int(datos[i]))
-            #print("Este es el tamanio de los datos a enviar: ",len(datos))
             s.sendto(datos, addr)
-        #if frecuencia_1 == 44100:
-
+            #if(contador==60):
             #time.sleep(0.019666666999999999999)
             #time.sleep(0.016666666999999999999)
+                #time.sleep(0.01666666999999999999)
+                #contador=0
+            #time.sleep(0.0091)
         #else:
          #   time.sleep(0.09999996942749023)
 
@@ -127,7 +131,7 @@ if __name__ == '__main__':
 
     #direcciones =["192.168.1.10","192.168.1.11","192.168.1.12","192.168.1.13","192.168.1.14"]
 
-    direcciones =["192.168.1.16"]
+    direcciones =["192.168.1.52"]
     directorio = '/home/kevin/audios/'
 
     IP_UDP = socket.gethostbyname_ex(socket.gethostname())[2][0]
@@ -136,7 +140,7 @@ if __name__ == '__main__':
 
     p = pyaudio.PyAudio()
 
-    mensaje=b'mario-bros-mamma-mia.wav'
+    mensaje=b'synthesize.wav'
 
     while True:                             # El servidor UDP se queda mandando constantemente.
                 
