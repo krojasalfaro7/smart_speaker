@@ -131,7 +131,7 @@ if __name__ == '__main__':
 
     #direcciones =["192.168.1.10","192.168.1.11","192.168.1.12","192.168.1.13","192.168.1.14"]
 
-    direcciones =["192.168.1.52"]
+    direcciones =["192.168.1.8"]
     directorio = '/home/kevin/audios/'
 
     IP_UDP = socket.gethostbyname_ex(socket.gethostname())[2][0]
@@ -140,7 +140,7 @@ if __name__ == '__main__':
 
     p = pyaudio.PyAudio()
 
-    mensaje=b'synthesize.wav'
+    mensaje=b'mario-bros-mamma-mia.wav'
 
     while True:                             # El servidor UDP se queda mandando constantemente.
                 
@@ -154,7 +154,7 @@ if __name__ == '__main__':
                 audio = mensaje.decode()[:len(mensaje)-3] # Convierte el bytes en string
                 convertidor(audio)              # Convierte el audio .wav a codificacion PCM
                 enviar()                        # Envia los datos de audio al ESP8266
-            time.sleep(2)
+            time.sleep(0.09)
 
 #=================================
 # Fin del Main - Programa General
