@@ -7,12 +7,15 @@
 
 #define MAX_INTENTOS 15       // Número de intentos para conectarse a wifi
 #define LED_PIN 2             // Led azul
-#define DAC 25                // Salida Digital-Analogico
+#define DAC 26                // Salida Digital-Analogico
 #define RECV_BUFFER_UDP 1024  // Tamaño de buffer de recepción de paquete UDP(Pareciera que fuera el máximo)
 
 /* WiFi network name and password PRUEBAS*/ //Se va a utilizar mientras se realiza la interfaz de conexión con bluethoo
-const char * ssid = "esp32";
-const char * pwd = "1234567890";
+const char * ssid = "Glufco";
+const char * pwd = "01GLUFCO";
+
+//const char * ssid = "esp32";
+//const char * pwd = "1234567890";
 
 //const char * udpAddress = "192.168.1.11"; //Dirección IP del servidor UDP
 const int udpPort = 44444; //Puerto del servidor UDP
@@ -53,8 +56,8 @@ void setup(){
     Serial.print("Failed conection");
     delay(5000);
   }
+  xTaskCreatePinnedToCore(reproducir, "reproducir", 4096, NULL, 5, NULL, 0);
   xTaskCreatePinnedToCore(recibir, "recibir", 4096, NULL, 2, NULL, 1);
-  xTaskCreatePinnedToCore(reproducir, "reproducir", 10000, NULL, 5, NULL, 0);
 }
 void loop(){
   //vTaskDelay(portTICK_PERIOD_MS);
@@ -63,12 +66,9 @@ void loop(){
 
 void reproducir(void *pvParameters) {
   while(1) {
-    TIMERG0.wdt_wprotect=TIMG_WDT_WKEY_VALUE;
-    TIMERG0.wdt_feed=1;
-    TIMERG0.wdt_wprotect=0;
     while(completeBuffer.size()>0){
       dacWrite(DAC, completeBuffer.pop()); // Sacando el valor digital por el conversor Digital-Analogico del ESP32
-      delayMicroseconds(38);                // (1/22050)*1000000 - 7(Aproximación de lo que se tarda el ciclo for)
+      delayMicroseconds(36);                // (1/22050)*1000000 - 7(Aproximación de lo que se tarda el ciclo for)
     }
   }
 }

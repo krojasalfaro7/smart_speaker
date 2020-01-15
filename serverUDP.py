@@ -98,21 +98,13 @@ def enviar():
     fragmento = int ((length/1024) + float(1))
     contador = 0
     print("El bucle deberia repetirse: "+str(fragmento) +"veces")
-    #x = input("ingresa algo")
     for i in range(0, fragmento):
         datos = waveFile.readframes(1024)
         for i in range(0, len(direcciones)):
             addr = (direcciones[i], UDP_port)
             s.sendto(datos, addr)
-            #if(contador==60):
-            #time.sleep(0.019666666999999999999)
-            time.sleep(0.032666666999999999999)
-            #time.sleep(0.039666666999999999999) #ESTE FUNCIONA RELATIVAMENTE BIEN
-                #time.sleep(0.01666666999999999999)
-                #contador=0
-            #time.sleep(0.0091)
-        #else:
-         #   time.sleep(0.09999996942749023)
+            #time.sleep(0.046666666999999999999)
+            time.sleep(0.039666666999999999999) #ESTE FUNCIONA RELATIVAMENTE BIEN
 
 #=============================================================================
 
@@ -130,9 +122,7 @@ if __name__ == '__main__':
     global directorio
     UDP_port = 44444
 
-    #direcciones =["192.168.1.10","192.168.1.11","192.168.1.12","192.168.1.13","192.168.1.14"]
-
-    direcciones =["192.168.1.15"]
+    direcciones =["192.168.1.68"]
     directorio = '/home/kevin/audios/'
 
     IP_UDP = socket.gethostbyname_ex(socket.gethostname())[2][0]
@@ -141,9 +131,9 @@ if __name__ == '__main__':
 
     p = pyaudio.PyAudio()
 
-    mensaje=b'synthesize.wav'
+#    mensaje=b'synthesize.wav'
 #    mensaje=b'mario-bros-mamma-mia.wav'
-#    mensaje=b'mario2_aver.wav'
+    mensaje=b'mario2_aver.wav'
 
     while True:                             # El servidor UDP se queda mandando constantemente.
                 
@@ -157,7 +147,6 @@ if __name__ == '__main__':
                 audio = mensaje.decode()[:len(mensaje)-3] # Convierte el bytes en string
                 convertidor(audio)              # Convierte el audio .wav a codificacion PCM
                 enviar()                        # Envia los datos de audio al ESP8266
-            #time.sleep(9)
             x=input()
 
 #=================================
